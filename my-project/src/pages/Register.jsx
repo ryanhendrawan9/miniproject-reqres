@@ -1,83 +1,99 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import netflix_spinner from "../assets/netflix_spinner.gif";
+import Logo from "../assets/logo.png";
 
 const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { register, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const success = await register(email, password);
+    await register(email, password);
     setIsSubmitting(false);
-    if (success) {
-      navigate("/login");
-    }
   };
 
   if (isAuthenticated) {
-    navigate("/");
-    return null;
+    return <Navigate to="/" />;
   }
 
-  return (
+  setTimeout(() => setLoading(false), 1000);
+
+  return loading ? (
+    <div className="flex items-center justify-center h-screen bg-black">
+      <img src={netflix_spinner} alt="Loading..." className="w-16 h-16" />
+    </div>
+  ) : (
     <Layout>
-      <div className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-md">
-        <h2 className="mb-6 text-2xl font-bold text-center">Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block mb-2 text-gray-700" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="eve.holt@reqres.in"
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block mb-2 text-gray-700" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="pistol"
-            />
-          </div>
-          <button
-            type="submit"
-            className={`w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded ${
-              isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-            }`}
-            disabled={isSubmitting}
+      <div className="h-screen bg-[linear-gradient(#0000007e,#0000007e),url('/background_banner.jpg')] bg-cover flex flex-col px-8">
+        <img src={Logo} alt="logo" className="w-40 mt-6 ml-16" />
+        <div className="flex items-center justify-center flex-grow">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full max-w-md p-8 bg-black rounded-md bg-opacity-70"
           >
-            {isSubmitting ? "Registering..." : "Register"}
-          </button>
-        </form>
-        <p className="mt-4 text-center text-gray-600">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-500 hover:underline">
-            Login
-          </Link>
-        </p>
-        <div className="p-4 mt-6 text-sm bg-gray-100 rounded">
-          <p className="mb-2 font-medium">Demo registration:</p>
-          <p>Email: eve.holt@reqres.in</p>
-          <p>Password: pistol</p>
+            <h1 className="mb-6 text-3xl font-bold text-center text-white">
+              Register
+            </h1>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full h-12 px-5 mb-4 text-white bg-gray-800 rounded-md focus:outline-none"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full h-12 px-5 mb-4 text-white bg-gray-800 rounded-md focus:outline-none"
+              />
+              <div className="relative">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full h-12 px-5 text-white bg-gray-800 rounded-md"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 mt-4 font-medium text-white transition-all bg-red-600 rounded-md hover:bg-red-700 disabled:opacity-50"
+              >
+                {isSubmitting ? "Registering..." : "Register"}
+              </button>
+            </form>
+            <p className="mt-4 text-gray-400">
+              <span className="font-medium">Demo registration:</span>
+            </p>
+            <p className="text-sm text-gray-300">Email: eve.holt@reqres.in</p>
+            <p className="mb-4 text-sm text-gray-300">Password: pistol</p>
+            <div className="mt-6 text-sm text-center text-gray-400">
+              <span>
+                Already have an account?{" "}
+                <Link to="/login" className="text-white hover:underline">
+                  Login
+                </Link>
+              </span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </Layout>

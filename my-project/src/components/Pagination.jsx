@@ -6,8 +6,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === 1}
         className={`px-4 py-2 rounded ${
           currentPage === 1
-            ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
+            ? "bg-gray-200  text-gray-500 cursor-not-allowed"
+            : "bg-blue-500 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#33CCCC,0_0_15px_#33CCCC,0_0_30px_#33CCCC] text-white hover:bg-blue-600 shadow-blue-500 border-2 border-blue-400 transition-all"
         }`}
       >
         Previous
@@ -21,7 +21,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className={`px-4 py-2 rounded ${
           currentPage === totalPages
             ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
+            : "bg-blue-500 text-white hover:bg-blue-600 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#33CCCC,0_0_15px_#33CCCC,0_0_30px_#33CCCC] shadow-blue-500 border-2 border-blue-400 transition-all"
         }`}
       >
         Next

@@ -92,7 +92,7 @@ const Home = () => {
         <span></span>
       </div>
       <motion.div
-        className="flex flex-col items-center justify-center min-h-screen px-4 text-white bg-black"
+        className="flex flex-col items-center justify-center min-h-screen px-4 pt-20 text-white bg-black"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}

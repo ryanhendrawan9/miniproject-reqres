@@ -34,7 +34,7 @@ const Register = () => {
   ) : (
     <Layout>
       <div className="h-screen bg-[linear-gradient(#0000007e,#0000007e),url('/background_banner.jpg')] bg-cover flex flex-col px-8">
-        <img src={Logo} alt="logo" className="w-40 mt-6 ml-16" />
+        <img src={Logo} alt="logo" className="w-40 mx-auto mt-20" />
         <div className="flex items-center justify-center flex-grow">
           <motion.div
             initial={{ opacity: 0, y: -20 }}

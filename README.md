@@ -10,10 +10,11 @@ Berikut adalah library yang digunakan dalam project ini:
 
 1. **React** - Sebagai framework utama untuk membangun aplikasi Frontend.
 2. **Tailwind CSS** - Untuk styling yang cepat dan responsif.
-3. **React Router Dom** - Untuk navigasi dan implementasi protected routes.
-4. **React Toastify** - Untuk menampilkan notifikasi feedback kepada pengguna.
-5. **React Hooks (useState, useEffect, useContext)** - Untuk mengelola state dan efek samping.
-6. **Fetch API** - Untuk mengambil data dari Reqres API.
+3. **Framer Motion** - Untuk menambahkan efek animasi yang lebih halus dan interaktif.
+4. **React Router Dom** - Untuk navigasi dan implementasi protected routes.
+5. **React Toastify** - Untuk menampilkan notifikasi feedback kepada pengguna.
+6. **React Hooks (useState, useEffect, useContext)** - Untuk mengelola state dan efek samping.
+7. **Fetch API** - Untuk mengambil data dari Reqres API.
 
 ## 🚀 Fitur yang Tersedia
 

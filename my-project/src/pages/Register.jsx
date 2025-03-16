@@ -81,17 +81,17 @@ const Register = () => {
               </button>
             </form>
             <p className="mt-4 text-gray-400">
-              <span className="font-medium">Demo registration:</span>
+              <p className="font-medium">Demo registration:</p>
             </p>
             <p className="text-sm text-gray-300">Email: eve.holt@reqres.in</p>
             <p className="mb-4 text-sm text-gray-300">Password: pistol</p>
             <div className="mt-6 text-sm text-center text-gray-400">
-              <span>
+              <p>
                 Already have an account?{" "}
                 <Link to="/login" className="text-white hover:underline">
                   Login
                 </Link>
-              </span>
+              </p>
             </div>
           </motion.div>
         </div>

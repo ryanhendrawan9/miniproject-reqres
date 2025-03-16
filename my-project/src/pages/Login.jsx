@@ -72,17 +72,17 @@ const Login = () => {
               </button>
             </form>
             <p className="mt-4 text-gray-400">
-              <span className="font-medium">Demo credentials:</span>
+              <p className="font-medium">Demo credentials:</p>
             </p>
             <p className="text-sm text-gray-300">Email: eve.holt@reqres.in</p>
             <p className="mb-4 text-sm text-gray-300">Password: cityslicka</p>
             <div className="mt-6 text-sm text-center text-gray-400">
-              <span>
+              <p>
                 Don't have an account?{" "}
                 <Link to="/register" className="text-white hover:underline">
                   Register
                 </Link>
-              </span>
+              </p>
             </div>
           </motion.div>
         </div>

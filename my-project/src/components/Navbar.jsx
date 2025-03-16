@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/logo.png";
 import search_icon from "../assets/search_icon.svg";
 import bell_icon from "../assets/bell_icon.svg";
-import profile_img from "../assets/profile_img.png";
 import caret_icon from "../assets/caret_icon.svg";
 import {
   FaUserEdit,
@@ -16,13 +16,20 @@ const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [profiles, setProfiles] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    fetch("https://reqres.in/api/users?page=2")
+      .then((res) => res.json())
+      .then((data) => setProfiles(data.data))
+      .catch((err) => console.error("Error fetching profiles:", err));
   }, []);
 
   return (
@@ -33,18 +40,25 @@ const Navbar = () => {
     >
       <div className="flex items-center justify-between mx-auto max-w-7xl">
         <div className="flex items-center gap-8">
-          <img src={Logo} alt="logo" className="w-24" />
+          <img
+            src={Logo}
+            alt="logo"
+            className="w-24 cursor-pointer"
+            onClick={() => navigate("/")}
+          />
           <ul className="hidden space-x-6 text-sm text-white md:flex">
-            <li className="cursor-pointer hover:text-gray-300">Home</li>
-            <li className="cursor-pointer hover:text-gray-300">TV Shows</li>
-            <li className="cursor-pointer hover:text-gray-300">Movies</li>
-            <li className="cursor-pointer hover:text-gray-300">
-              New & Popular
-            </li>
-            <li className="cursor-pointer hover:text-gray-300">My List</li>
-            <li className="cursor-pointer hover:text-gray-300">
-              Browse by Languages
-            </li>
+            {[
+              "Home",
+              "TV Shows",
+              "Movies",
+              "New & Popular",
+              "My List",
+              "Browse by Languages",
+            ].map((item, index) => (
+              <li key={index} className="cursor-pointer hover:text-gray-300">
+                {item}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -63,32 +77,32 @@ const Navbar = () => {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <img
-                  src={profile_img}
+                  src={profiles.length > 0 ? profiles[0].avatar : ""}
                   alt="Profile"
                   className="w-10 h-10 rounded-md"
                 />
                 <img src={caret_icon} alt="Caret" className="w-4" />
               </div>
+
               {dropdownOpen && (
                 <div className="absolute right-0 p-4 mt-3 text-white bg-black rounded-md shadow-lg w-52 bg-opacity-80">
                   <ul className="space-y-3 profile-list">
-                    {["Profile 1", "Profile 2", "Profile 3", "Profile 4"].map(
-                      (profile, index) => (
-                        <li
-                          key={index}
-                          className="flex items-center gap-3 text-white cursor-pointer hover:text-decoration:underline"
-                        >
-                          <img
-                            src={profile_img}
-                            alt={profile}
-                            className="w-8 h-8 rounded"
-                          />
-                          <p className="transition-all duration-200 hover:underline">
-                            {profile}
-                          </p>
-                        </li>
-                      )
-                    )}
+                    {profiles.map((profile) => (
+                      <li
+                        key={profile.id}
+                        className="flex items-center gap-3 text-white cursor-pointer hover:underline"
+                        onClick={() => navigate(`/user/${profile.id}`)}
+                      >
+                        <img
+                          src={profile.avatar}
+                          alt={`${profile.first_name} ${profile.last_name}`}
+                          className="w-8 h-8 rounded"
+                        />
+                        <p>
+                          {profile.first_name} {profile.last_name}
+                        </p>
+                      </li>
+                    ))}
                   </ul>
 
                   <ul className="mt-2 space-y-2 text-white">

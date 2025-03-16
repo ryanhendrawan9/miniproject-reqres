@@ -36,7 +36,7 @@ span:before {
     opacity: 1;
   }
   100% {
-    transform: rotate(315deg) translateX(-1500px);
+    transform: rotate(315deg) translateX(-520px);
     opacity: 0;
   }
 }

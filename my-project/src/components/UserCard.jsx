@@ -13,7 +13,7 @@ const UserCard = ({ user }) => {
           <h3 className="text-lg font-medium">
             {user.first_name} {user.last_name}
           </h3>
-          <p className="text-gray-600">{user.email}</p>
+          <p className="text-gray-300">{user.email}</p>
         </div>
       </div>
     </Link>

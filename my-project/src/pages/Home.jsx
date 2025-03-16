@@ -90,8 +90,6 @@ const Home = () => {
         <span></span>
         <span></span>
         <span></span>
-        <span></span>
-        <span></span>
       </div>
       <motion.div
         className="flex flex-col items-center justify-center min-h-screen px-4 text-white bg-black"

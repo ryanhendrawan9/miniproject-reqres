@@ -314,7 +314,7 @@ const Login = () => {
               </li>
             </ul>
           </div>
-          <select class="bg-transparent border px-4 py-1 rounded text-white mt-8">
+          <select className="px-4 py-1 mt-8 text-white bg-transparent border rounded focus:bg-black focus:text-white focus:outline-none">
             <option value="en">English</option>
             <option value="id">Indonesia</option>
           </select>

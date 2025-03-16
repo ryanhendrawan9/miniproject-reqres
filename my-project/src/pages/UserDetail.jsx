@@ -90,7 +90,7 @@ const UserDetail = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              Back to Users
+              Back to Netflix
             </Link>
           </motion.div>
 
